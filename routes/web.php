@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/groceryitems', 'GroceryItemsController@index');
 
 Route::post('groceryitems', 'GroceryItemsController@store');
+Route::post('grocery/{id}', 'GroceryItemsController@addToList');
 Route::delete('/grocer/{id}', 'GroceryItemsController@destroy');

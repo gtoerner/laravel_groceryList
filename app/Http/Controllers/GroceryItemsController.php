@@ -116,4 +116,12 @@ class GroceryItemsController extends Controller
         $item->delete();
         return redirect('groceryitems')->with('success','Item has been  deleted');
     }
+
+    public function addToList($id)
+    {
+        $item = GroceryItems::find($id);
+        $item->isActive = 1;
+        $item->save();
+        return redirect('groceryitems')->with('success','Item has been  deleted');
+    }
 }

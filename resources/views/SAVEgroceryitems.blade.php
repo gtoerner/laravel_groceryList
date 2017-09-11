@@ -40,26 +40,25 @@
                                             <tbody>
                                             @foreach ($grocery_items as $item)
                                                 <tr>
-                                                    <td class="table-text">
-                                                        @if ($item->isActive == 1)
-                                                            <div style="color:rgb(255,43,193)">
-                                                                {{ $item->name }}
-                                                            </div>
-                                                        @else
-                                                            <div>
-                                                                {{ $item->name }}
-                                                            </div>
-                                                        @endif
-                                                    </td>
+                                                    <td class="table-text"><div>{{ $item->name }}</div></td>
 
                                                     <!-- Task Delete Button -->
                                                     <td>
-                                                        <form action="{{action('GroceryItemsController@addToList', $item['id'])}}" method="POST" >
+                                                        <!--
+                                                        <form action="{{action('GroceryItemsController@destroy', $item['id'])}}" method="POST">
                                                             {{ csrf_field() }}
+                                                            <input name="_method" type="hidden" value="DELETE">
                                                             <button type="submit" class="btn btn-danger">
-                                                                <i class="fa fa-btn fa-trash"></i>Add to List
+                                                                <i class="fa fa-btn fa-trash"></i>Delete
                                                             </button>
                                                         </form>
+                                                        -->
+                                                            <form action="{{action('GroceryItemsController@addToList', $item['id'])}}" method="POST" >
+                                                                {{ csrf_field() }}
+                                                                <button type="submit" class="btn btn-danger">
+                                                                    <i class="fa fa-btn fa-trash"></i>Delete
+                                                                </button>
+                                                            </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
