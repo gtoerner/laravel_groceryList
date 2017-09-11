@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GroceryItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GroceryItemsController extends Controller
 {
@@ -43,7 +44,30 @@ class GroceryItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = $this->validate(request(), [
+            'name' => 'required'
+        ]);
+
+        GroceryItems::create($item);
+        return back()->with('success', 'Item has been added');
+        /*
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/groceryitems')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        $item = new GroceryItems;
+        $item->name = $request->name;
+        $item->save;
+
+        return redirect('/groceryitems');
+        */
+
     }
 
     /**
@@ -88,6 +112,8 @@ class GroceryItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = GroceryItems::find($id);
+        $item->delete();
+        return redirect('groceryitems')->with('success','Item has been  deleted');
     }
 }

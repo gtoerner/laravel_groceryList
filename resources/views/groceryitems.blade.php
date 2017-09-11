@@ -14,6 +14,17 @@
                             </div>
                         @endif
 
+                            <form method="POST" action="{{ url('/groceryitems')}}" accept-charset="UTF-8">
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    <label for="name">New Item:</label>
+                                    <input class="form-control" name="name" type="text" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <input class="btn btn-primary" type="submit" value="Add Item!">
+                                </div>
+                            </form>
+                            <hr>
                             @if (count($grocery_items) > 0)
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
@@ -33,10 +44,9 @@
 
                                                     <!-- Task Delete Button -->
                                                     <td>
-                                                        <form action="{{ url('grocer/'.$item->id) }}" method="POST">
+                                                        <form action="{{action('GroceryItemsController@destroy', $item['id'])}}" method="POST">
                                                             {{ csrf_field() }}
-                                                            {{ method_field('DELETE') }}
-
+                                                            <input name="_method" type="hidden" value="DELETE">
                                                             <button type="submit" class="btn btn-danger">
                                                                 <i class="fa fa-btn fa-trash"></i>Delete
                                                             </button>
